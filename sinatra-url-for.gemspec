@@ -2,16 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sinatra-url-for}
-  s.version = "0.2.1"
+  s.version = "0.2.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Eric Kidd"]
-  s.date = %q{2009-04-22}
-  s.email = %q{git@randomhacks.net}
+  s.authors = ["Eric Kidd", "Luis Merino"]
+  s.date = %q{2014-03-29}
+  s.email = ["git@randomhacks.net", "mail@luismerino.name"]
   s.extra_rdoc_files = ["README.rdoc", "LICENSE"]
   s.files = ["README.rdoc", "VERSION.yml", "lib/sinatra", "lib/sinatra/url_for.rb", "spec/spec_helper.rb", "spec/url_for_spec.rb", "LICENSE"]
   s.has_rdoc = true
-  s.homepage = %q{http://github.com/emk/sinatra-url-for}
+  s.homepage = %q{https://github.com/proudsugar/sinatra-url-for}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}

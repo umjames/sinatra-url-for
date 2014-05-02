@@ -31,17 +31,19 @@ module Sinatra
         options = mode
         mode = nil
       end
-      
+
       if mode.nil?
         mode = :path_only
       end
-      
+
       url_fragment, options = process_url_placeholders(url_fragment, options)
       mode = mode.to_sym unless mode.is_a? Symbol
       optstring = nil
-      
+
       if options.is_a? Hash
-        optstring = '?' + options.map { |k,v| "#{k}=#{escape_for_url(v)}" }.join('&')
+        unless options.empty?
+          optstring = '?' + options.map { |k,v| "#{k}=#{escape_for_url(v)}" }.join('&')
+        end
       end
 
       case mode
@@ -61,34 +63,34 @@ module Sinatra
       end
       "#{base}#{url_fragment}#{optstring}"
     end
-    
+
     private
-    
+
     def escape_for_url(value)
       return URI.escape(value.to_s, /[^#{URI::PATTERN::UNRESERVED}]/)
     end
-    
+
     def process_url_placeholders(url_fragment, options)
       unless url_contains_placeholders?(url_fragment)
         return [url_fragment, options]
       end
-      
+
       options_used = Set.new
-      
+
       options.each_pair do |placeholder_name, value|
         while (url_fragment.include?(":#{placeholder_name}"))
           url_fragment.sub!(Regexp.new(":#{placeholder_name}"), escape_for_url(value))
           options_used << placeholder_name
         end
       end
-      
+
       options_used.each do |used_option|
         options.delete(used_option)
       end
-      
+
       return [url_fragment, options]
     end
-    
+
     def url_contains_placeholders?(url_fragment)
       return ((url_fragment.to_s =~ /:([^\/ ])+/).nil? ? false : true)
     end
